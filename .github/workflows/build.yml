@@ -7,10 +7,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-22.04]
-        compiler: [gcc]
-        buildtool: [cmake]
-        openssl: [openssl1]
-        sockaddr: [generic-sockaddr]
+        compiler: [clang]
+        buildtool: [autotools]
+        openssl: [openssl3]
+        sockaddr: [native-sockaddr, generic-sockaddr]
         exclude:
         - os: macos-11
           buildtool: distcheck
