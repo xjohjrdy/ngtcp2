@@ -10,7 +10,7 @@ jobs:
         compiler: [clang]
         buildtool: [autotools]
         openssl: [openssl3]
-        sockaddr: [native-sockaddr, generic-sockaddr]
+        sockaddr: [generic-sockaddr]
         exclude:
         - os: macos-11
           buildtool: distcheck
@@ -196,7 +196,7 @@ jobs:
     - name: upload
       uses: actions/upload-artifact@v3.1.0
       with:
-        path: $NGTCP2_BUILD_DIR
+        path: /home/runner/work/ngtcp2/ngtcp2
     - name: Integration test
       if: matrix.buildtool != 'distcheck' && matrix.sockaddr == 'native-sockaddr'
       run: |
