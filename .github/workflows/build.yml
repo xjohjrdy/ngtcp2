@@ -6,11 +6,11 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-11]
-        compiler: [gcc, clang]
-        buildtool: [autotools, distcheck, cmake]
-        openssl: [openssl1, openssl3]
-        sockaddr: [native-sockaddr, generic-sockaddr]
+        os: [ubuntu-22.04]
+        compiler: [gcc]
+        buildtool: [cmake]
+        openssl: [openssl1]
+        sockaddr: [generic-sockaddr]
         exclude:
         - os: macos-11
           buildtool: distcheck
@@ -193,6 +193,10 @@ jobs:
       run: |
         make -j"$NPROC" distcheck \
           DISTCHECK_CONFIGURE_FLAGS="--enable-werror --with-openssl --with-gnutls --with-boringssl $EXTRA_AUTOTOOLS_OPTS"
+    - name: upload
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        path: $NGTCP2_BUILD_DIR
     - name: Integration test
       if: matrix.buildtool != 'distcheck' && matrix.sockaddr == 'native-sockaddr'
       run: |
@@ -296,3 +300,4 @@ jobs:
     - name: Build ngtcp2
       run: |
         cmake --build build
+  
