@@ -10,7 +10,7 @@ jobs:
         compiler: [clang]
         buildtool: [autotools]
         openssl: [openssl3]
-        sockaddr: [generic-sockaddr]
+        sockaddr: [native-sockaddr]
         exclude:
         - os: macos-11
           buildtool: distcheck
